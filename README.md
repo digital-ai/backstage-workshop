@@ -61,3 +61,4 @@ yarn dev
 
 #### 4. View the Active Deployment in Backstage app.
 ![Active Deployment](deploy/img/deployment_active.png)
+
