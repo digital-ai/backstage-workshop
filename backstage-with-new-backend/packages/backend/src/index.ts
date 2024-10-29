@@ -11,21 +11,21 @@ import {createBackendModule} from "@backstage/backend-plugin-api";
 import {PermissionPolicy, PolicyQuery} from "@backstage/plugin-permission-node";
 import {BackstageIdentityResponse} from "@backstage/plugin-auth-node";
 import {AuthorizeResult, isPermission, PolicyDecision} from "@backstage/plugin-permission-common";
-import {catalogConditions, createCatalogConditionalDecision} from "@backstage/plugin-catalog-backend/alpha";
-import {policyExtensionPoint} from "@backstage/plugin-permission-node/alpha";
+import {catalogConditions, createCatalogConditionalDecision} from "@backstage/plugin-catalog-backend";
+import {policyExtensionPoint} from "@backstage/plugin-permission-node";
 import {
     catalogEntityDeletePermission,
-} from '@backstage/plugin-catalog-common/alpha';
+} from '@backstage/plugin-catalog-common';
 import {
     daiDeployViewPermission
 } from "@digital-ai/plugin-dai-deploy-common";
 
 const backend = createBackend();
 
-backend.add(import('@backstage/plugin-app-backend/alpha'));
-backend.add(import('@backstage/plugin-proxy-backend/alpha'));
-backend.add(import('@backstage/plugin-scaffolder-backend/alpha'));
-backend.add(import('@backstage/plugin-techdocs-backend/alpha'));
+backend.add(import('@backstage/plugin-app-backend'));
+backend.add(import('@backstage/plugin-proxy-backend'));
+backend.add(import('@backstage/plugin-scaffolder-backend'));
+backend.add(import('@backstage/plugin-techdocs-backend'));
 
 // auth plugin
 backend.add(import('@backstage/plugin-auth-backend'));
@@ -34,18 +34,18 @@ backend.add(import('@backstage/plugin-auth-backend-module-guest-provider'));
 // See https://backstage.io/docs/auth/guest/provider
 
 // catalog plugin
-backend.add(import('@backstage/plugin-catalog-backend/alpha'));
+backend.add(import('@backstage/plugin-catalog-backend'));
 backend.add(
   import('@backstage/plugin-catalog-backend-module-scaffolder-entity-model'),
 );
 
 // permission plugin
-backend.add(import('@backstage/plugin-permission-backend/alpha'));
+backend.add(import('@backstage/plugin-permission-backend'));
 
 // search plugin
-backend.add(import('@backstage/plugin-search-backend/alpha'));
-backend.add(import('@backstage/plugin-search-backend-module-catalog/alpha'));
-backend.add(import('@backstage/plugin-search-backend-module-techdocs/alpha'));
+backend.add(import('@backstage/plugin-search-backend'));
+backend.add(import('@backstage/plugin-search-backend-module-catalog'));
+backend.add(import('@backstage/plugin-search-backend-module-techdocs'));
 backend.add(import('@digital-ai/plugin-dai-deploy-backend'));
 
 class CustomPermissionPolicy implements PermissionPolicy {

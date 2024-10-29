@@ -31,15 +31,15 @@
     ]
   },
   "devDependencies": {
-    "@backstage/cli": "^0.26.3",
+    "@backstage/cli": "^0.28.1",
     "@backstage/e2e-test-utils": "^0.1.1",
-    "@playwright/test": "^1.32.3",
-    "@spotify/prettier-config": "^12.0.0",
-    "concurrently": "^8.0.0",
-    "lerna": "^7.3.0",
-    "node-gyp": "^9.0.0",
-    "prettier": "^2.3.2",
-    "typescript": "~5.3.0"
+    "@playwright/test": "^1.48.2",
+    "@spotify/prettier-config": "^15.0.0",
+    "concurrently": "^9.0.1",
+    "lerna": "^8.1.8",
+    "node-gyp": "^10.2.0",
+    "prettier": "^3.3.3",
+    "typescript": "~5.6.3"
   },
   "resolutions": {
     "@types/react": "^18",
@@ -54,5 +54,6 @@
     "*.{json,md}": [
       "prettier --write"
     ]
-  }
+  },
+  "packageManager": "yarn@1.22.22+sha512.a6b2f7906b721bba3d67d4aff083df04dad64c399707841b7acf00f6b133b7ac24255f2652fa22ae3534329dc6180534e98d17432037ff6fd140556e2bb3137e"
 }
