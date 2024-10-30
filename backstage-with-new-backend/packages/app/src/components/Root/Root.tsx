@@ -32,14 +32,18 @@ import {ReleaseSvgIcon} from '@digital-ai/plugin-dai-release'
 import '@digital-ai/dot-icons/index.css';
 
 export const templateIcon = () => {
-return <span className="dot-icon">
-<i className="icon-template"/>
-</span>
-}
+return (
+  <span className="dot-icon">
+  <i className="icon-template"/>
+  </span>
+  );
+};
 export const activeReleaseIcon = () => {
-return <span className="dot-icon">
-<i className="icon-release"/>
-</span>
+return (
+  <span className="dot-icon">
+  <i className="icon-release"/>
+  </span>
+  );
 }
 
 const useSidebarLogoStyles = makeStyles({
@@ -101,7 +105,7 @@ export const Root = ({ children }: PropsWithChildren<{}>) => (
           />
         </SidebarSubmenu>
         </SidebarItem>
-          {/*<SidebarItem icon={ReleaseSvgIcon} to="dai-release" text="digital.ai release" />*/}
+          {/* <SidebarItem icon={ReleaseSvgIcon} to="dai-release" text="digital.ai release" />*/}
         </SidebarScrollWrapper>
         <SidebarDivider />
         <SidebarScrollWrapper>

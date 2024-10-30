@@ -11,11 +11,11 @@ import {createBackendModule} from "@backstage/backend-plugin-api";
 import {PermissionPolicy, PolicyQuery} from "@backstage/plugin-permission-node";
 import {BackstageIdentityResponse} from "@backstage/plugin-auth-node";
 import {AuthorizeResult, isPermission, PolicyDecision} from "@backstage/plugin-permission-common";
-import {catalogConditions, createCatalogConditionalDecision} from "@backstage/plugin-catalog-backend";
-import {policyExtensionPoint} from "@backstage/plugin-permission-node";
+import {catalogConditions, createCatalogConditionalDecision} from "@backstage/plugin-catalog-backend/alpha";
+import {policyExtensionPoint} from "@backstage/plugin-permission-node/alpha";
 import {
     catalogEntityDeletePermission,
-} from '@backstage/plugin-catalog-common';
+} from '@backstage/plugin-catalog-common/alpha';
 import {
     daiDeployViewPermission
 } from "@digital-ai/plugin-dai-deploy-common";
