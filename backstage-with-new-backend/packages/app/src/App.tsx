@@ -37,7 +37,7 @@ import { AppRouter, FlatRoutes } from '@backstage/core-app-api';
 import { CatalogGraphPage } from '@backstage/plugin-catalog-graph';
 import { RequirePermission } from '@backstage/plugin-permission-react';
 import { catalogEntityCreatePermission } from '@backstage/plugin-catalog-common/alpha';
-import {DaiReleasePage, } from '@digital-ai/plugin-dai-release';
+import { DaiReleasePage,DaiTemplatePage } from '@digital-ai/plugin-dai-release';
 
 
 const app = createApp({
@@ -103,7 +103,7 @@ const routes = (
     <Route path="/settings" element={<UserSettingsPage />} />
     <Route path="/catalog-graph" element={<CatalogGraphPage />} />
     <Route path="/dai-release" element={<DaiReleasePage/>}/>
-    <Route path="/dai-template" element={<DaiReleasePage/>}/>
+    <Route path="/dai-template" element={<DaiTemplatePage/>}/>
   </FlatRoutes>
 );
 
