@@ -5,8 +5,8 @@ import {
   PluginDatabaseManager,
   PluginEndpointDiscovery,
   TokenManager,
-  UrlReader,
 } from '@backstage/backend-common';
+import UrlReader from "@backstage/plugin-scaffolder-backend"
 import { PluginTaskScheduler } from '@backstage/backend-tasks';
 import { PermissionEvaluator } from '@backstage/plugin-permission-common';
 import { IdentityApi } from '@backstage/plugin-auth-node';
@@ -16,7 +16,7 @@ export type PluginEnvironment = {
   database: PluginDatabaseManager;
   cache: PluginCacheManager;
   config: Config;
-  reader: UrlReader;
+  reader: typeof UrlReader;
   discovery: PluginEndpointDiscovery;
   tokenManager: TokenManager;
   scheduler: PluginTaskScheduler;

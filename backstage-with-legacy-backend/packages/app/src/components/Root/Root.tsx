@@ -22,11 +22,29 @@ import {
   SidebarScrollWrapper,
   SidebarSpace,
   useSidebarOpenState,
+  SidebarSubmenu,
+  SidebarSubmenuItem,
   Link,
 } from '@backstage/core-components';
 import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
 import {ReleaseSvgIcon} from '@digital-ai/plugin-dai-release'
+import '@digital-ai/dot-icons/index.css';
+
+export const templateIcon = () => {
+return (
+  <span className="dot-icon">
+  <i className="icon-template"/>
+  </span>
+  );
+};
+export const activeReleaseIcon = () => {
+return (
+  <span className="dot-icon">
+  <i className="icon-release"/>
+  </span>
+  );
+}
 
 const useSidebarLogoStyles = makeStyles({
   root: {
@@ -73,7 +91,21 @@ export const Root = ({ children }: PropsWithChildren<{}>) => (
         {/* End global nav */}
         <SidebarDivider />
         <SidebarScrollWrapper>
-          <SidebarItem icon={ReleaseSvgIcon} to="dai-release" text="digital.ai release" />
+            <SidebarItem icon={ReleaseSvgIcon} onClick={() => {}} text="digital.ai Release">
+                <SidebarSubmenu title="Release">
+                  <SidebarSubmenuItem
+                  title="Active releases"
+                  to="dai-release"
+                  icon={activeReleaseIcon}
+                  />
+                  <SidebarSubmenuItem
+                  title="Templates"
+                  to="dai-template"
+                  icon={templateIcon}
+                  />
+                </SidebarSubmenu>
+            </SidebarItem>
+              {/* <SidebarItem icon={ReleaseSvgIcon} to="dai-release" text="digital.ai release" />*/}
         </SidebarScrollWrapper>
         <SidebarDivider />
         <SidebarScrollWrapper>
