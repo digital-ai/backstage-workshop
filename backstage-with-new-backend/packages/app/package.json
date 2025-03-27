@@ -41,7 +41,7 @@
     "@backstage/theme": "^0.6.4",
     "@digital-ai/dot-icons": "^1.0.37",
     "@digital-ai/plugin-dai-deploy": "^0.1.3",
-    "@digital-ai/plugin-dai-release": "^0.1.1-alpha.9",
+    "@digital-ai/plugin-dai-release": "^0.1.4",
     "@digital-ai/plugin-scaffolder-frontend-module-deploy-app-field": "^0.0.1-alpha.1",
     "@material-ui/core": "^4.12.4",
     "@material-ui/icons": "^4.11.3",

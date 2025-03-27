@@ -4709,10 +4709,10 @@
     moment "2.30.1"
     react-use "^17.5.1"
 
-"@digital-ai/plugin-dai-release-backend@^0.1.1-alpha.6":
+"@digital-ai/plugin-dai-release-backend@^0.1.2":
   version "0.1.2"
-  resolved "https://registry.yarnpkg.com/@digital-ai/plugin-dai-release-backend/-/plugin-dai-release-backend-0.1.2.tgz#579bb101f305b3e610e4dadafefff2f2c3727e5f"
-  integrity sha512-VWet7MdiUvblKiauOnl83eYg99c09K6EdS536Mkwo9XiQMhK4rjb1mjIuL2tSh+fqcE5uF4ibTFNycIOIicIvA==
+  resolved "https://npm.pkg.github.com/download/@digital-ai/plugin-dai-release-backend/0.1.2/00720619ccd939df73dad2dc5cd9fea96ca02d41#00720619ccd939df73dad2dc5cd9fea96ca02d41"
+  integrity sha512-7USN4PiSBe2P66mtZYKtG49ioSd3iWhAhNQiXJtM5Hz+d6OFOKqsihqikM+X4mIGdTEkBGp3AZf0XY7vl/OfPA==
   dependencies:
     "@backstage/backend-common" "^0.25.0"
     "@backstage/backend-defaults" "^0.7.0"
@@ -4740,10 +4740,10 @@
     "@backstage/plugin-permission-common" "^0.8.4"
     "@backstage/plugin-permission-node" "^0.8.7"
 
-"@digital-ai/plugin-dai-release@^0.1.1-alpha.9":
-  version "0.1.3"
-  resolved "https://registry.yarnpkg.com/@digital-ai/plugin-dai-release/-/plugin-dai-release-0.1.3.tgz#c7954f300049f23b5c6b3288d73fe9445a61c904"
-  integrity sha512-JTnJGVPyvnVgrzFfQtoQMqUbxwqUNp5ktv2zoPmAHkuKmNVIv/tA10LwuiTGN4kaBzKO7E4pcvr4j2wxdsuOhw==
+"@digital-ai/plugin-dai-release@^0.1.4":
+  version "0.1.4"
+  resolved "https://npm.pkg.github.com/download/@digital-ai/plugin-dai-release/0.1.4/dc88a64031aed592c352845c60ac6af203d2569d#dc88a64031aed592c352845c60ac6af203d2569d"
+  integrity sha512-QTy1g+1VArnlbbixevoViUGAet59mrE+fvqTX1940DGMk2CvuO6XeQeBtjOuDXsQU1K38fQkFjCaWmOS30W6rg==
   dependencies:
     "@backstage/core-components" "^0.16.3"
     "@backstage/core-plugin-api" "^1.10.3"
@@ -10280,7 +10280,7 @@
   resolved "https://registry.yarnpkg.com/@types/range-parser/-/range-parser-1.2.7.tgz#50ae4353eaaddc04044279812f52c8c65857dbcb"
   integrity sha512-hKormJbkJqzQGhziax5PItDUTMAM9uE2XXQmM37dyd4hVM+5aVl7oVxMVUiVQn2oCQFN/LKCZdvSM0pFRqbSmQ==
 
-"@types/react-dom@*":
+"@types/react-dom@*", "@types/react-dom@^18":
   version "18.3.5"
   resolved "https://registry.yarnpkg.com/@types/react-dom/-/react-dom-18.3.5.tgz#45f9f87398c5dcea085b715c58ddcf1faf65f716"
   integrity sha512-P4t6saawp+b/dFrUr2cvkVsfvPguwsxtH6dNIYRllMsefqFzkZk5UIjzyDOv5g1dXIPdG4Sp1yCR4Z6RCUsG/Q==
@@ -10307,10 +10307,10 @@
   resolved "https://registry.yarnpkg.com/@types/react-transition-group/-/react-transition-group-4.4.12.tgz#b5d76568485b02a307238270bfe96cb51ee2a044"
   integrity sha512-8TV6R3h2j7a91c+1DXdJi3Syo69zzIZbz7Lg5tORM5LEJG7X/E6a1V3drRyBRZq7/utz7A+c4OgYLiLcYGHG6w==
 
-"@types/react@*", "@types/react@^16.13.1 || ^17.0.0 || ^18.0.0":
-  version "18.3.19"
-  resolved "https://registry.yarnpkg.com/@types/react/-/react-18.3.19.tgz#2b6a01315c9b1b644a8799a7d33efb027150240f"
-  integrity sha512-fcdJqaHOMDbiAwJnXv6XCzX0jDW77yI3tJqYh1Byn8EL5/S628WRx9b/y3DnNe55zTukUQKrfYxiZls2dHcUMw==
+"@types/react@*", "@types/react@^16.13.1 || ^17.0.0 || ^18.0.0", "@types/react@^18":
+  version "18.3.20"
+  resolved "https://registry.yarnpkg.com/@types/react/-/react-18.3.20.tgz#b0dccda9d2f1bc24d2a04b1d0cb5d0b9a3576ad3"
+  integrity sha512-IPaCZN7PShZK/3t6Q87pfTkRm6oLTd4vztyoj+cbHUF1g3FfVb2tFIL79uCRKEfv16AhqDMBywP2VW3KIZUvcg==
   dependencies:
     "@types/prop-types" "*"
     csstype "^3.0.2"
@@ -11121,7 +11121,8 @@ apg-lite@^1.0.3, apg-lite@^1.0.4:
     "@backstage/theme" "^0.6.4"
     "@digital-ai/dot-icons" "^1.0.37"
     "@digital-ai/plugin-dai-deploy" "^0.1.3"
-    "@digital-ai/plugin-dai-release" "^0.1.1-alpha.9"
+    "@digital-ai/plugin-dai-release" "^0.1.4"
+    "@digital-ai/plugin-scaffolder-frontend-module-deploy-app-field" "^0.0.1-alpha.1"
     "@material-ui/core" "^4.12.4"
     "@material-ui/icons" "^4.11.3"
     history "^5.3.0"
