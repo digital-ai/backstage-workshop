@@ -1,0 +1,22 @@
+# Use postgres/example user/password credentials
+version: '3.4'
+
+services:
+  dai-release:
+    image: ${DAI_RELEASE_IMAGE}
+    environment:
+      - ADMIN_PASSWORD=admin
+      - ACCEPT_EULA=Y
+    networks:
+    - dai-network
+  dai-deploy:
+    image: ${DAI_DEPLOY_IMAGE}
+    environment:
+      - ADMIN_PASSWORD=admin
+      - ACCEPT_EULA=Y
+    networks:
+      - dai-network
+networks:
+  dai-network:
+    external:
+      name: ${NETWORK_NAME}

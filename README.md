@@ -12,7 +12,7 @@ docker run -e "ADMIN_PASSWORD=admin" -e "ACCEPT_EULA=Y" -p 4516:4516 -d --name x
 docker pull xebialabsunsupported/xl-client:24.1
 ```
 ```shell
-docker run  -v $(pwd):$(pwd) -w $(pwd) xebialabsunsupported/xl-client:24.1 apply -f deploy/deploy-application.yaml --xl-deploy-url http://<deployhost>:4516/ -name xlcli
+docker run  -v $(pwd):$(pwd) -w $(pwd) xebialabsunsupported/xl-client:24.1 apply -f deploy/digital-ai-deploy.yaml --xl-deploy-url http://<deployhost>:4516/ -name xlcli
 ```
 Note: Before Running the above command please update  "http://deployhost:4516/" with actual deploy url.
 
@@ -108,6 +108,10 @@ yarn dev
 ![image](https://github.com/digital-ai/backstage-workshop/assets/88083340/7ae3c5d2-c73f-4f1c-adba-a4046c6e05df)
 
 
+# To run the backstage in docker with the github auth , dai-release and dai-deploy plugin:
+Refer the [docker/README.md](docker/README.md) for more details.
+
+
 ## Documentation Links
 
 **Digital.ai Deploy:**
@@ -119,3 +123,5 @@ yarn dev
 
 * [Overview](https://docs.digital.ai/bundle/devops-release-version-v.24.1/page/release/concept/release-backstage-overview.html)
 * [Adding Release Plugin to Your Backstage IDP](https://docs.digital.ai/bundle/devops-release-version-v.24.1/page/release/concept/release-backstage-plugin.html)
+
+
