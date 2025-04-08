@@ -45,6 +45,13 @@ return (
   </span>
   );
 }
+export const workflowIcon = () => {
+  return (
+      <span className="dot-icon">
+  <i className="icon-workflow"/>
+  </span>
+  );
+}
 
 const useSidebarLogoStyles = makeStyles({
   root: {
@@ -102,6 +109,11 @@ export const Root = ({ children }: PropsWithChildren<{}>) => (
           title="Templates"
           to="dai-template"
           icon={templateIcon}
+          />
+          <SidebarSubmenuItem
+              title="Workflows"
+              to="/dai-workflows"
+              icon={workflowIcon}
           />
         </SidebarSubmenu>
         </SidebarItem>

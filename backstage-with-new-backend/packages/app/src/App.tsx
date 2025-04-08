@@ -37,8 +37,9 @@ import { AppRouter, FlatRoutes } from '@backstage/core-app-api';
 import { CatalogGraphPage } from '@backstage/plugin-catalog-graph';
 import { RequirePermission } from '@backstage/plugin-permission-react';
 import { catalogEntityCreatePermission } from '@backstage/plugin-catalog-common/alpha';
-import { DaiReleasePage,DaiTemplatePage } from '@digital-ai/plugin-dai-release';
-
+import {DaiReleasePage, DaiTemplatePage, DaiWorkflowCatalog} from '@digital-ai/plugin-dai-release';
+import { DeployApplicationSelectorFieldExtension } from '@digital-ai/plugin-scaffolder-frontend-module-deploy-app-field';
+import { ScaffolderFieldExtensions } from '@backstage/plugin-scaffolder-react';
 
 const app = createApp({
   apis,
@@ -104,6 +105,12 @@ const routes = (
     <Route path="/catalog-graph" element={<CatalogGraphPage />} />
     <Route path="/dai-release" element={<DaiReleasePage/>}/>
     <Route path="/dai-template" element={<DaiTemplatePage/>}/>
+    <Route path="/dai-workflows" element={<DaiWorkflowCatalog/>}/>
+    <Route path="/create" element={<ScaffolderPage />}>
+      <ScaffolderFieldExtensions>
+          <DeployApplicationSelectorFieldExtension />
+      </ScaffolderFieldExtensions>
+    </Route>
   </FlatRoutes>
 );
 
