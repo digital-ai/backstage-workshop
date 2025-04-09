@@ -1,6 +1,6 @@
 app:
-  title: Scaffolded Backstage App
-  baseUrl: http://localhost:3000
+  title: Scaffolded Digital.ai Backstage App
+  baseUrl: http://localhost:3000/
 
 organization:
   name: Digital.ai
@@ -45,11 +45,12 @@ integrations:
 
 proxy:
   endpoints:
-    /deploy-app:
-      target: http://<deployhost>:4516/
+    '/deploy-app':
+      target: ${DAI_DEPLOY_HOST}
       changeOrigin: true
       headers:
-        Authorization: <Bearer Token>
+        Authorization: ${DAI_DEPLOY_AUTH_TOKEN} #'Basic YWRtaW46YWRtaW4='
+        Content-Type: application/json
   ### Example for how to add a proxy endpoint for the frontend.
   ### A typical reason to do this is to handle HTTPS and CORS for internal services.
   # endpoints:
@@ -82,7 +83,7 @@ catalog:
     entityFilename: catalog-info.yaml
     pullRequestBranchName: backstage-integration
   rules:
-    - allow: [Component, System, API, Resource, Location, Template]
+    - allow: [Component, System, API, Resource, Location]
   locations:
     # Local example data, file locations are relative to the backend process, typically `packages/backend`
     - type: file
@@ -119,14 +120,10 @@ permission:
 
 daiRelease:
   instances:
-    - name: 'Production'
-      host: http://production-release-url:5516/
-      token: <ACCESS-TOKEN> # Generated token from the release instance.
-    - name: 'Staging'
-      host: http://staging-release-url:5516/
-      token: <ACCESS-TOKEN> # Generated token from the release instance.
-
+    - name: ${DAI_RELEASE_INSTANCE1_NAME}
+      host: ${DAI_RELEASE_INSTANCE1_HOST}
+      token: ${DAI_RELEASE_INSTANCE1_TOKEN}
 daiDeploy:
-  host: 'http://<deployhost>:4516'
-  username: '<username>'
-  password: '<password>'
+     host: ${DAI_DEPLOY_HOST}
+     username: ${DAI_DEPLOY_USERNAME}
+     password: ${DAI_DEPLOY_PASSWORD}

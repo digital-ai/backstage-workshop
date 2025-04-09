@@ -1,13 +1,13 @@
 # Set Network, Environment variables and start the services.
 export NETWORK_NAME=dai-backstage
-export DAI_RELEASE_IMAGE=xebialabs/xl-release:24.1
-export DAI_DEPLOY_IMAGE=xebialabs/xl-deploy:24.1
-export DAI_BACKSTAGE_IMAGE=xebialabsunsupported/dai-backstage-docker:1.0.0
+export DAI_RELEASE_IMAGE=xebialabs/xl-release:24.3
+export DAI_DEPLOY_IMAGE=xebialabs/xl-deploy:24.3
+export DAI_BACKSTAGE_IMAGE=xebialabsunsupported/dai-backstage-docker:1.0.1
 export DAI_DEPLOY_USERNAME=admin
 export DAI_DEPLOY_PASSWORD=admin
 export GITHUB_TOKEN=<GITHUB_TOKEN>
-export AUTH_GITHUB_CLIENT_ID=<AUTH_GITHUB_CLIENT_ID>
-export AUTH_GITHUB_CLIENT_SECRET=<AUTH_GITHUB_CLIENT_SECRET>
+export START_BACKSTAGE_IN_DOCKER=false
+
 
 # Create the external network
 docker network create $NETWORK_NAME
@@ -64,18 +64,28 @@ export DAI_DEPLOY_HOST=http://$deployIp:4516
 export DAI_DEPLOY_USERNAME=$DAI_DEPLOY_USERNAME
 export DAI_DEPLOY_PASSWORD=$DAI_DEPLOY_PASSWORD
 
-# Start the backstage
-docker-compose -f docker-compose_backstage.yaml up -d
+echo http://$releaseIp:5516
+echo http://$deployIp:4516
 
-export daiBackstageIp=$(docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' docker-backstage-1)
-# Wait for the dai-backstage service to be ready with timeout
-until curl -s http://$daiBackstageIp:7007 > /dev/null ; do
-  if [[ $elapsed_time_backstage -ge $timeout ]]; then
-    echo "Timeout reached. dai-backstage is not ready within $timeout seconds."
-    exit 1  # Exit with an error if the service is not ready
-  fi
-  echo "Waiting for the dai-backstage to be ready..."
-  sleep 10
-  elapsed_time_backstage=$((elapsed_time_backstage + 10))  # Increment elapsed time for dai-backstage
-done
-echo "dai-backstage is ready!"
+if [ "$START_BACKSTAGE_IN_DOCKER" = "true" ]; then
+  # Start the backstage
+  docker-compose -f docker-compose_backstage.yaml up -d
+
+  export daiBackstageIp=$(docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' docker-backstage-1)
+  # Wait for the dai-backstage service to be ready with timeout
+  until curl -s http://$daiBackstageIp:7007 > /dev/null ; do
+    if [[ $elapsed_time_backstage -ge $timeout ]]; then
+      echo "Timeout reached. dai-backstage is not ready within $timeout seconds."
+      exit 1  # Exit with an error if the service is not ready
+    fi
+    echo "Waiting for the dai-backstage to be ready..."
+    sleep 10
+    elapsed_time_backstage=$((elapsed_time_backstage + 10))  # Increment elapsed time for dai-backstage
+  done
+  echo "dai-backstage is ready!"
+fi
+
+if [ "$START_BACKSTAGE_IN_DOCKER" = "false" ]; then
+  cd ../backstage-with-new-backend
+  yarn dev
+fi
