@@ -30,6 +30,8 @@ import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
 import {ReleaseSvgIcon} from '@digital-ai/plugin-dai-release'
 import '@digital-ai/dot-icons/index.css';
+import DigitalAILogoFull from './logo/digital-ai-reverse-logo.png';
+import DigitalAILogoIcon from './logo/digital-ai-favicon-reverse.png';
 
 export const templateIcon = () => {
 return (
@@ -60,13 +62,53 @@ const useSidebarLogoStyles = makeStyles({
     display: 'flex',
     flexFlow: 'row nowrap',
     alignItems: 'center',
-    marginBottom: -14,
+    justifyContent: 'center',
+    marginBottom: -28,
   },
   link: {
     width: sidebarConfig.drawerWidthClosed,
-    marginLeft: 24,
+    marginLeft: 20,
   },
 });
+
+const BackedByBackstage = () => {
+  const {isOpen} = useSidebarOpenState();
+  const useStyles = makeStyles({
+    text: {
+      width: sidebarConfig.drawerWidthOpen,
+      color: '#b5b5b5',
+      display: 'flex',
+      fontSize: '10px',
+      marginLeft: 35,
+      minHeight: '14px',
+    },
+  });
+
+  const classes = useStyles();
+
+  return (
+      <div className={classes.text}>
+        {isOpen ? <div>&copy; Backed by Backstage</div> : ''}
+      </div>
+  );
+};
+
+const LogoFull = () => {
+  const svg = {
+    width: 'auto',
+    height: 50,
+    marginLeft: 10,
+  }
+  return <img src={DigitalAILogoFull} style={svg} alt="Digital.ai"/>;
+};
+
+const LogoIcon = () => {
+  const svg = {
+    width: 'auto',
+    height: 40,
+  }
+  return <img src={DigitalAILogoIcon} style={svg} alt="Digital.ai"/>;
+};
 
 const SidebarLogo = () => {
   const classes = useSidebarLogoStyles();
@@ -85,6 +127,7 @@ export const Root = ({ children }: PropsWithChildren<{}>) => (
   <SidebarPage>
     <Sidebar>
       <SidebarLogo />
+      <BackedByBackstage/>
       <SidebarGroup label="Search" icon={<SearchIcon />} to="/search">
         <SidebarSearchModal />
       </SidebarGroup>
