@@ -47,6 +47,7 @@ backend.add(import('@backstage/plugin-search-backend'));
 backend.add(import('@backstage/plugin-search-backend-module-catalog'));
 backend.add(import('@backstage/plugin-search-backend-module-techdocs'));
 backend.add(import('@digital-ai/plugin-dai-deploy-backend'));
+backend.add(import('@roadiehq/scaffolder-backend-module-utils'));
 
 class CustomPermissionPolicy implements PermissionPolicy {
     async handle(

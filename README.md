@@ -1,31 +1,9 @@
 # Backstage Workshop
-
-## Setup Digital-ai Deploy [optional]
-### 1. Run the following command to run deploy in docker container. [More details on docker images of xl-deploy](https://hub.docker.com/r/xebialabs/xl-deploy)
-```shell
-docker run -e "ADMIN_PASSWORD=admin" -e "ACCEPT_EULA=Y" -p 4516:4516 -d --name xld xebialabsunsupported/xl-deploy:24.1
-```
-
-### 2. Run the following command to create Application, Infrastructure, Environment  and deploy the application in the created Environment using Digital-ai Deploy. 
-#### Run the command from the root directory.
-```shell
-docker pull xebialabsunsupported/xl-client:24.1
-```
-```shell
-docker run  -v $(pwd):$(pwd) -w $(pwd) xebialabsunsupported/xl-client:24.1 apply -f deploy/digital-ai-deploy.yaml --xl-deploy-url http://<deployhost>:4516/ -name xlcli
-```
-Note: Before Running the above command please update  "http://deployhost:4516/" with actual deploy url.
-
-## Setup Digital-ai Release [optional]
-### 1. Run the following command to run deploy in docker container. [More details on docker images of xl-release](https://hub.docker.com/r/xebialabs/xl-release)
-```shell
-docker run -e "ADMIN_PASSWORD=admin" -e "ACCEPT_EULA=Y" -p 5516:5516 -d --name xlr-23.3 xebialabsunsupported/xl-release:24.1
-```
-
+## 1. Prerequisites
 ## Configure npmrc file with the following content, available in home directory.
 1. Windows  
    a.%USERPROFILE%\.npmrc **(eg: C:\Users\username\.npmrc)**
-2. Linux 
+2. Linux
    a.~/.npmrc **(eg: /home/username/.npmrc)**
 3. Mac
    a.~/.npmrc **(eg: /Users/username/.npmrc)**
@@ -40,76 +18,99 @@ strict-ssl=false
 @digital-ai:registry=https://registry.npmjs.org
 ```
 
-## Setup backstage using legacy backend system.
-#### 1. Run the following command from root directory
+# Setup of Digital-ai Deploy , Digital-ai Release and Backstage using script available under docker directory.
+## 1. Prerequisites
+### a. Install docker and docker-compose.
+### b. Run the below command from the root directory of the backstage.
 ```shell
-cd backstage-with-legacy-backend
-```
-#### 2. Configure the deploy and release instance from previous step or else configure the existing instance by adding the following to your app-config.yaml files.
-```yaml
-daiDeploy:
-  host: http://<deployhost>:4516
-  username: '<username>'
-  password: '<password>'
-  
-daiRelease:
-   instances:
-      - name: 'Production'
-        host: http://<releasehost>:5516/
-        token: <ACCESS-TOKEN> # Generated token from the release instance.
-      - name: 'QE'
-        host: http://<releasehost>:5516/
-        token: <ACCESS-TOKEN> # Generated token from the release instance.
-      - name: 'Staging'
-        host: http://<releasehost>:5516/
-        token: <ACCESS-TOKEN> # Generated token from the release instance.
-```
-#### 3. Run the following command to start the backstage app with deploy plugin installed.
-```shell
+cd backstage-with-new-backend
 yarn install
-```
+````
+### b. Backstage Setup Instructions
+This section outlines how to configure and run the Backstage application. Please follow the instructions carefully.
+
+#### Running Backstage
+
+Before you run the Backstage application, you need to update the `docker/dai-backstage_up.sh` file according to your desired method of execution:
+1. **To run the backstage in docker with the github auth , dai-release and dai-deploy plugin:** 
+   - Refer the [docker/README.md](docker/README.md) for more details.
+   - Set the value of `START_BACKSTAGE_IN_DOCKER` to `true`.
+
+2. **To start Backstage from a script:**
+   - Set the value of `BACKSTAGE_MANUAL_INSTALL` to `false`.
+
+3. **To start Backstage manually:**
+   - Set the value of `BACKSTAGE_MANUAL_INSTALL` to `true`.
+   - You will find the `.env` file in the `bacstage-new-backend` directory.
+
 ```shell
-yarn dev
+# Set Network, Environment variables and start the services.
+export NETWORK_NAME=dai-backstage
+export DAI_RELEASE_IMAGE=xebialabs/xl-release:24.3
+export DAI_DEPLOY_IMAGE=xebialabs/xl-deploy:24.3
+export DAI_BACKSTAGE_IMAGE=xebialabsunsupported/dai-backstage-docker:1.0.1
+export DAI_DEPLOY_USERNAME=admin
+export DAI_DEPLOY_PASSWORD=admin
+export GITHUB_TOKEN=<GITHUB_TOKEN>
+export AUTH_GITHUB_CLIENT_ID=<AUTH_GITHUB_CLIENT_ID>
+export AUTH_GITHUB_CLIENT_SECRET=<AUTH_GITHUB_CLIENT_SECRET>
+export START_BACKSTAGE_IN_DOCKER=false
+export BACKSTAGE_MANUAL_INSTALL = true
 ```
 
-#### 4. View the Digital-ai Deploy - Active Deployment in Backstage app.
+4. Run the following command to start the deploy, release and backstage
+```shell
+cd docker
+./dai-backstage_up.sh
+```
+
+eg: We are starting the release and deploy  with a script and updating the environment file in the `backstage-new-backend` directory.
+![TerminalLog](img/terminalLog.png)
+![env](img/env.png)
+
+5. Start the Backstage application using the following command:
+```shell
+cd ../backstage-with-new-backend
+LOG_LEVEL=debug NODE_OPTIONS=--no-node-snapshot yarn dev:env
+````
+6. View the Digital-ai Deploy - Active Deployment in Backstage app.
 ![Active Deployment](deploy/img/deployment_active.png)
-
-#### 5. View the Digital-ai Release - Active Release in Backstage app.
+7. View the Digital-ai Deploy - Archive Deployment in Backstage app.
+![Archive Deployment](deploy/img/archive.png)
+8. View the Digital-ai Release - Active Release in Backstage app.
 ![image](https://github.com/digital-ai/backstage-workshop/assets/88083340/7ae3c5d2-c73f-4f1c-adba-a4046c6e05df)
+9. View Digital-ai Release - Template in Backstage app.
+![Template](release/img/template.png)
+10. View Digital-ai Release - Workflow in Backstage app.
+![Workflow](release/img/workflow.png) 
 
-## Setup backstage using New backend system.
+
+## Setup backstage using New backend system and connect to existing Deploy and Release instance.
 #### 1. Run the following command from root directory
 ```shell
 cd backstage-with-new-backend
 ```
-#### 2. Configure the deploy and release instance from previous step or else configure the existing instance by adding the following to your app-config.yaml files.
-```yaml
-daiDeploy:
-  host: http://<deployhost>:4516
-  username: 'admin'
-  password: 'admin'
-daiRelease:
-  host: http://<releasehost>:5516
-  token: rpa_862c5cd8b6e76f551d4f4b2e862e1e8a34be3972 # Generated token from the release instance.
-```
 #### 3. Run the following command to start the backstage app with deploy plugin installed.
 ```shell
 yarn install
 ```
+#### 4. Create the .env file and update the values for the environment variables like below.
 ```shell
-yarn dev
+[ishwarya@ishwarya-Precision-5480 backstage-with-new-backend]* update_readme $ cat .env
+GITHUB_TOKEN=ghp_vC2ZE2Xzklr6UbegqWIwle8OvAfeBR01De4Aey
+DAI_RELEASE_INSTANCE1_NAME=dai-release-instance
+DAI_RELEASE_INSTANCE1_TOKEN=
+DAI_RELEASE_INSTANCE1_HOST=http://172.29.0.2:5516
+DAI_DEPLOY_HOST=http://172.29.0.3:4516
+DAI_DEPLOY_USERNAME=admin
+DAI_DEPLOY_PASSWORD=admin
+DAI_DEPLOY_AUTH_TOKEN=Basic YWRtaW46YWRtaW4=
 ```
-
-#### 4. View the Digital-ai Deploy - Active Deployment in Backstage app.
-![Active Deployment](deploy/img/deployment_active.png)
-
-#### 5. View the Digital-ai Release - Active Release in Backstage app.
-![image](https://github.com/digital-ai/backstage-workshop/assets/88083340/7ae3c5d2-c73f-4f1c-adba-a4046c6e05df)
-
-
-# To run the backstage in docker with the github auth , dai-release and dai-deploy plugin:
-Refer the [docker/README.md](docker/README.md) for more details.
+5. Run the following command to start the backstage app.
+```shell
+LOG_LEVEL=debug NODE_OPTIONS=--no-node-snapshot yarn dev:env
+```
+6. Open your browser at http://localhost:3000 to access the backstage with the default plugins[dai-release, dai-deploy] installed.
 
 
 ## Documentation Links
